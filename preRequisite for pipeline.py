@@ -43,3 +43,20 @@ for folder in folders:
     files = dbutils.fs.ls(src_dir)
     if files:
         dbutils.fs.cp(files[0].path, os.path.join(dst_dir, os.path.basename(files[0].path)))
+
+
+
+
+dbutils.fs.mkdirs("/Volumes/learnwithatul/ops/dblearner/customers")
+dbutils.fs.mkdirs("/Volumes/learnwithatul/ops/dblearner/orders")
+dbutils.fs.mkdirs("/Volumes/learnwithatul/ops/dblearner/status")
+
+
+catalog_name ='db_retail'
+volume_name = 'v01.retail_pipeline.customers.stream_json'
+spark.sql(f"CREATE CATALOG IF NOT EXISTS {catalog_name}")
+
+
+spark.sql("""
+CREATE VOLUME IF NOT EXISTS db_retail.v01.retail_pipeline
+""")
